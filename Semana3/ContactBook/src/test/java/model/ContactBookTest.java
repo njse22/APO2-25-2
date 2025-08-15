@@ -1,8 +1,9 @@
 package model;
 
+import exceptions.ContactAlreadyExistException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ContactBookTest {
@@ -13,11 +14,16 @@ public class ContactBookTest {
         contactBook = new ContactBook();
     }
 
-    void setupStage2(){
+    void setupStage2() {
         contactBook = new ContactBook();
-        contactBook.add("name1", "email1@mail.com", "10");
-        contactBook.add("name2", "email2@mail.com", "20");
-        contactBook.add("name3", "email3@mail.com", "30");
+        try {
+            contactBook.addContact("name1", "email1@mail.com", "10");
+            contactBook.addContact("name2", "email2@mail.com", "20");
+            contactBook.addContact("name3", "email3@mail.com", "30");
+        }
+        catch (ContactAlreadyExistException e) {
+
+        }
     }
 
     @Test
@@ -42,9 +48,68 @@ public class ContactBookTest {
         Contact contactResult = contactBook.search("email@mail.com");
 
         // assert
-        assertNull(contactResult); 
+        assertNull(contactResult);
+
+    }
+
+    @Test
+    void testSearch3(){
+        // arraneg
+        setupStage2();
+
+        //act
+        Contact contactResult = contactBook.search("email1@mail.com");
+
+        // Assert
+        String name = "name1";
+        String phone = "10";
+        String email = "email1@mail.com";
+
+        assertNotNull(contactResult);
+        assertEquals(name, contactResult.getName());
+        assertEquals(phone, contactResult.getPhone());
+        assertEquals(email, contactResult.getEmail());
+
+    }
 
 
+    @Test
+    void testAdd1(){
+        // Arrange / init
+        setupStage1();
+
+        // act
+        boolean result = contactBook.add("Name1", "email@mail.com", "10");
+
+        // assert
+        assertTrue(result);
+    }
+
+    @Test
+    void testAdd2(){
+        // Arrange / init
+        setupStage2();
+
+        // act
+        boolean result;
+        try {
+            result = contactBook.addContact("name2", "email2@mail.com", "20");
+
+        } catch (ContactAlreadyExistException e) {
+            result = false;
+        }
+        assertFalse(result);
+    }
+
+    @Test
+    void testAdd3(){
+        // Arrange / init
+        setupStage2();
+
+        // Assert
+        assertThrows(ContactAlreadyExistException.class,
+                // act
+                () -> { contactBook.addContact("name1", "email1@mail.com", "10");} );
     }
 
 }
