@@ -112,4 +112,20 @@ public class ContactBookTest {
                 () -> { contactBook.addContact("name1", "email1@mail.com", "10");} );
     }
 
+    @Test
+    void testDoubleNumbers() {
+        // Arrange / init
+
+        // Assert
+        assertEquals(0.5, 0.46, 0.05);
+    }
+
+    @Test
+    void testDoubleNumbers2() {
+        // Arrange / init
+
+        // Assert
+        assertNotEquals(0.5, 0.43, 0.05);
+    }
+
 }
