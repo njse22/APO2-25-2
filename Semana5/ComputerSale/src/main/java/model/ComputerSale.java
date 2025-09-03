@@ -46,8 +46,44 @@ public class ComputerSale {
         }
     }
 
-    public void sortByBrandInsertion(){
+    public Computer binarySearch(String goal){
+        int start = 0; // pos
+        int end = comps.size() -1; // pos
+        int mid = (start + end)/2;
+        Computer found = null;
 
+        while (start <= end && found == null){
+            if(comps.get(mid).getBrand().compareTo(goal) == 0){
+                found = comps.get(mid);
+            }
+
+            else if(comps.get(mid).getBrand().compareTo(goal) > 0){
+                start = start;
+                end = mid - 1;
+                mid = (start + end)/2;
+            }
+
+            else if(comps.get(mid).getBrand().compareTo(goal) < 0){
+                start = mid + 1;
+                end = end;
+                mid = (start + end)/2;
+            }
+        }
+
+        return found;
+    }
+
+    public void sortByBrandInsertion(){
+        for( int i = 1; i < comps.size(); i ++){
+            Computer current = comps.get(i);
+            int j = i - 1;
+
+            while (j >= 0 && current.compareTo(comps.get(j)) < 0 ){
+                comps.set(j+1, comps.get(j));
+                --j;
+            }
+            comps.set(j+1, current);
+        }
     }
 
     // inserción

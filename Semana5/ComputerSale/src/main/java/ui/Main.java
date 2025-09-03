@@ -11,16 +11,17 @@ public class Main {
         Computer[] comps =  ComputerSale.generateRandomComputers(4);
         controller.setComputers(comps);
         printArray(controller.getComps());
-        //controller.sortByBrandSelection();
+        controller.sortByBrandInsertion();
 
-        Comparator<Computer> comparator = (c1, c2) -> {
-           return c1.getProcessors() - c2.getProcessors();
-        };
+       // Comparator<Computer> comparator = (c1, c2) -> {
+       //    return c1.getProcessors() - c2.getProcessors();
+       // };
 
-        controller.selectionSort(comparator);
+       // controller.selectionSort(comparator);
 
         System.out.println("********************************************************");
         printArray(controller.getComps());
+        System.out.println(controller.binarySearch("4"));
 
     }
 
