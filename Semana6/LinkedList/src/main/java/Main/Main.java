@@ -1,10 +1,12 @@
 package Main;
 
+import structures.CircularList;
 import structures.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
+        // LinkedList list = new LinkedList();
+        CircularList list = new CircularList();
         list.add("A1");
         list.add("A2");
         list.add("A3");
