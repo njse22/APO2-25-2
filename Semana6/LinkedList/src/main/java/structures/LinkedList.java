@@ -7,6 +7,37 @@ public class LinkedList {
 
     }
 
+    public boolean delete(String goal){
+        boolean deleted = false;
+        // Caso Base eliminar de una lista vacia
+        if(first == null){
+            deleted = false;
+        }
+        // Caso Base eliminar el primero de la lista
+        else if(first.getData().equals(goal)){
+            first = first.getNext();
+            deleted = true;
+        }
+        // Caso Recursivo eliminar cualquier otro elemento
+        else {
+            deleted = delete(first, first.getNext(), goal);
+        }
+        return deleted;
+    }
+
+    private boolean delete(Node previous, Node current, String goal){
+        boolean deleted = false;
+        if(current != null && current.getData().equals(goal)){
+            previous.setNext(current.getNext());
+            current.setNext(null);
+            deleted = true;
+        }
+        else if(current != null) {
+            deleted =delete(current, current.getNext(), goal);
+        }
+        return deleted;
+    }
+
 
     public void add(String data){
         Node node = new Node(data);
