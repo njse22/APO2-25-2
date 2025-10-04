@@ -12,5 +12,7 @@ public class Main {
         binaryTreeIntegers.add(41);
 
         System.out.println(binaryTreeIntegers.inOrder());
+
+        System.out.println(binaryTreeIntegers.search(43));
     }
 }

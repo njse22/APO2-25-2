@@ -64,7 +64,33 @@ public class BST<T extends Comparable<T>> {
     }
 
     public boolean search(T element){
-        return false;
+        boolean found = false;
+        // Caso Base : is empty tree
+        if(root == null){
+            found = false;
+        }
+        // Caso recursivo
+        else{
+            search(root, element);
+        }
+        return found;
+    }
+
+    private boolean search(Node<T> current, T element){
+        boolean found = false;
+        if(current != null){
+            if (current.getValue() == element){
+                found = true;
+            }
+            else if(current.getValue().compareTo(element) > 0){
+                found = search(current.getLeft(), element);
+            }
+            else if (current.getValue().compareTo(element) < 0){
+                found = search(current.getRight(), element);
+            }
+        }
+
+        return found;
     }
 
     public void delete(T element){
@@ -84,12 +110,16 @@ public class BST<T extends Comparable<T>> {
     }
 
     private String inOrder(Node<T> curent){
+        // Caso recursio
         if(curent != null){
+            // Recorrido por izquerda           |   Valor actual          |     Recorrido por derecha
             return inOrder(curent.getLeft()) + " " + curent.getValue() + " " + inOrder(curent.getRight());
         }
+        // Caso base
         else {
             return "";
         }
     }
+
 
 }
