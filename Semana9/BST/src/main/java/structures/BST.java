@@ -95,6 +95,105 @@ public class BST<T extends Comparable<T>> {
 
     public void delete(T element){
 
+        if(root.getValue().compareTo(element) == 0){
+            // Eliminar la raiz
+            if(root.getRight() == null && root.getLeft() == null){
+                root = null;
+            } else if (root.getLeft() != null && root.getRight() == null) {
+                root = root.getLeft();
+            } else if (root.getLeft() == null && root.getRight() != null) {
+                root = root.getRight();
+            }else {
+                Node<T> predecessor = getMax(root.getLeft());
+                root.setValue(predecessor.getValue());
+                delete(root, root.getLeft(), predecessor.getValue());
+            }
+        }
+        else {
+            delete(null, root, element );
+        }
+
+    }
+
+    private void delete(Node<T> parent, Node<T> current, T element){
+        // Buscar el nodo
+        if(current != null){
+            // Caso Base -> Encontramos el nodo
+            if (current.getValue() == element){
+                // ES nodo hoja
+                if(current.getRight() == null && current.getLeft() == null){
+                    // Hijo izq
+                    if(parent.getLeft() == current){
+                        parent.setLeft(null);
+                    }
+                    // Hijo der
+                    else {
+                        parent.setRight(null);
+                    }
+                }
+                // CASO BASE
+                // Unico hijo izq
+                else if (current.getLeft() != null && current.getRight() == null){
+                    // Hijo izq
+                    if(parent.getLeft() == current){
+                       parent.setLeft(current.getLeft());
+                       current.setLeft(null);
+                    }
+                    // Hijo der
+                    else {
+                        parent.setRight(current.getLeft());
+                        current.setLeft(null);
+                    }
+
+                }
+                // Unico hijo der
+                else if (current.getLeft() == null && current.getRight() != null){
+                    // Hijo izq
+                    if(parent.getLeft() == current){
+                        parent.setLeft(current.getRight());
+                        current.setRight(null);
+                    }
+                    // Hijo der
+                    else {
+                        parent.setRight(current.getRight());
+                        current.setRight(null);
+                    }
+                }
+                // Ambos hijos
+                else if (current.getLeft() != null && current.getRight() != null){
+                    Node<T> predecessor = getMax(current.getLeft());
+                    current.setValue(predecessor.getValue());
+                    delete(current, current.getLeft(), predecessor.getValue());
+                }
+
+            }
+            // El elemento a eliminar es menor que el nodo actual
+            else if(current.getValue().compareTo(element) > 0){
+                delete(current, current.getLeft(), element);
+
+            }
+            // El elemento a eliminar es mayor que el nodo actual
+            else if (current.getValue().compareTo(element) < 0){
+                delete(current, current.getRight(), element);
+            }
+        }
+    }
+
+    public T getMax(){
+        return getMax(root).getValue();
+    }
+
+    private Node<T> getMax(Node<T> current){
+        Node<T> max = null;
+        if(current != null){
+            if(current.getRight() != null){
+                max = getMax(current.getRight());
+            }
+            else {
+                max = current;
+            }
+        }
+        return max;
     }
 
     public String inOrder(){
