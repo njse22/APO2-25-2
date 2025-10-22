@@ -4,14 +4,18 @@
 <?import javafx.scene.layout.*?>
 
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.icesi.demofx2.control.ListPersonController">
+<VBox prefHeight="400.0" prefWidth="600.0"
+      xmlns="http://javafx.com/javafx/17.0.2-ea"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.icesi.demofx2.control.ListPersonController">
    <children>
-      <TextArea fx:id="listTextArea" layoutX="37.0" layoutY="27.0" prefHeight="200.0" prefWidth="200.0" />
-      <HBox>
-         <children>
-            <Button layoutX="262.0" layoutY="40.0" mnemonicParsing="false" text="Button" />
-            <Button layoutX="129.0" layoutY="248.0" mnemonicParsing="false" text="Button" />
-         </children>
-      </HBox>
+      <TableView fx:id="tableViewPerson">
+         <columns>
+            <TableColumn fx:id="tableColumnName" text="Name" ></TableColumn>
+            <TableColumn fx:id="tableColumnAge" text="Age" ></TableColumn>
+         </columns>
+      </TableView>
+      <Button fx:id="deleteBtn" onAction="#onDelete" text="Delete"> </Button>
+      <Button onAction="#onInfo" text="Info"> </Button>
    </children>
 </VBox>

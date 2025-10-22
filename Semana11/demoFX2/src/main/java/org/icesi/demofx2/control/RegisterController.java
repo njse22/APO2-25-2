@@ -2,6 +2,7 @@ package org.icesi.demofx2.control;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.icesi.demofx2.HelloApplication;
@@ -20,10 +21,20 @@ public class RegisterController implements Initializable {
 
     @FXML
     protected void onRegisterPerson(){
-        String name = nameText.getText();
-        int age = Integer.parseInt(ageText.getText());
+        String name = "";
+        int age = -1;
+        try {
+            name = nameText.getText();
+            age = Integer.parseInt(ageText.getText());
+            controller.registerPerson(name, age);
+        }catch (NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setContentText("El valor de la edad debe ser un entero");
+            alert.showAndWait();
 
-        controller.registerPerson(name, age);
+        }
+
         HelloApplication.openWindow("list-person-view.fxml");
         System.out.println("RegisterController::onRegister >>" + controller);
 

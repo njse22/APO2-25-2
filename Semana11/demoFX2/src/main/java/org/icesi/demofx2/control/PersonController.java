@@ -1,5 +1,7 @@
 package org.icesi.demofx2.control;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.icesi.demofx2.model.Person;
 
 import java.util.ArrayList;
@@ -8,10 +10,10 @@ public class PersonController {
 
     private static PersonController instance;
 
-    private ArrayList<Person> people;
+    private ObservableList<Person> people;
 
     private PersonController() {
-        people = new ArrayList<>();
+        people = FXCollections.observableArrayList();
     }
 
     public static PersonController getInstance() {
@@ -26,7 +28,7 @@ public class PersonController {
         people.add(p);
     }
 
-    public ArrayList<Person> getPeople() {
+    public ObservableList<Person> getPeople() {
         return people;
     }
 }
