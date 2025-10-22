@@ -3,19 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<VBox prefHeight="400.0" prefWidth="600.0"
-      xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.icesi.demofx2.control.ListPersonController">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.icesi.demofx2.control.ListPersonController">
    <children>
       <TableView fx:id="tableViewPerson">
          <columns>
-            <TableColumn fx:id="tableColumnName" text="Name" ></TableColumn>
-            <TableColumn fx:id="tableColumnAge" text="Age" ></TableColumn>
+            <TableColumn fx:id="tableColumnName" text="Name" />
+            <TableColumn fx:id="tableColumnAge" text="Age" />
          </columns>
       </TableView>
-      <Button fx:id="deleteBtn" onAction="#onDelete" text="Delete"> </Button>
-      <Button onAction="#onInfo" text="Info"> </Button>
+      <HBox>
+         <Button onAction="#onDelete" prefHeight="26.0" prefWidth="62.0" text="Delete"> </Button>
+         <Button onAction="#onInfo" prefHeight="26.0" prefWidth="62.0" text="Info"> </Button>
+      </HBox>
    </children>
 </VBox>

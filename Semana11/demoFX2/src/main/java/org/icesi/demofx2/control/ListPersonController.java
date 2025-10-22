@@ -21,10 +21,6 @@ public class ListPersonController implements Initializable {
     @FXML
     private TableColumn<Person, Integer> tableColumnAge;
 
-    @FXML
-    private Button deleteBtn;
-
-
     private PersonController controller;
 
     @Override
@@ -53,11 +49,19 @@ public class ListPersonController implements Initializable {
         tableViewPerson.setOnMouseClicked( (event) -> {
 
             Person p = tableViewPerson.getSelectionModel().getSelectedItem();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR delete");
-            alert.setContentText(p.toString());
-            alert.showAndWait();
-
+            if(p != null){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("DELETE");
+                alert.setContentText("La persona: " + p.getName() + " será eliminada");
+                alert.showAndWait();
+                controller.getPeople().remove(p);
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.NONE);
+                alert.setTitle("DELETE");
+                alert.setContentText("No se ha seleccionado ninguna persona");
+                alert.showAndWait();
+            }
 
         });
     }
